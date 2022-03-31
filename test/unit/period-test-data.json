@@ -1,0 +1,8 @@
+{
+  "id": 1,
+  "period": {
+    "startOn": "2022-03-01",
+    "endBefore": "2022-03-02"
+  },
+  "name": "Hello"
+}

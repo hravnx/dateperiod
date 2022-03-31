@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{DDA84BB4-715B-4F4D-A286-1C350BE5CD3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatePeriod", "src\lib\DatePeriod.csproj", "{FC5E3BBF-3171-44E6-9A4A-B0954DAB1104}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{383FE477-D067-4BF6-9F72-E676EF8D2C85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatePeriod.UnitTests", "test\unit\DatePeriod.UnitTests.csproj", "{3D88C9A3-E35C-4324-A51C-6CAEB0914A55}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "misc", "misc", "{652F7F79-F198-4396-B497-C92A8E6CDDA7}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+		LICENSE = LICENSE
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC5E3BBF-3171-44E6-9A4A-B0954DAB1104}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC5E3BBF-3171-44E6-9A4A-B0954DAB1104}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC5E3BBF-3171-44E6-9A4A-B0954DAB1104}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC5E3BBF-3171-44E6-9A4A-B0954DAB1104}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D88C9A3-E35C-4324-A51C-6CAEB0914A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D88C9A3-E35C-4324-A51C-6CAEB0914A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D88C9A3-E35C-4324-A51C-6CAEB0914A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D88C9A3-E35C-4324-A51C-6CAEB0914A55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FC5E3BBF-3171-44E6-9A4A-B0954DAB1104} = {DDA84BB4-715B-4F4D-A286-1C350BE5CD3D}
+		{3D88C9A3-E35C-4324-A51C-6CAEB0914A55} = {383FE477-D067-4BF6-9F72-E676EF8D2C85}
+	EndGlobalSection
+EndGlobal

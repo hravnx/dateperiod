@@ -1,0 +1,8 @@
+{
+  "id": 2,
+  "period": {
+    "startOx": "2022-01-01",
+    "endBefore": "2022-01-02"
+  },
+  "name": "bad prop name"
+}
