@@ -1,6 +1,7 @@
 ﻿#r "nuget: FsMake"
 
 open FsMake
+open System
 open System.IO
 
 let configFrom (ctx:MakeContext) =
@@ -45,6 +46,16 @@ let unitTest = Step.create "test:unit" {
         |> Cmd.run
 }
 
+let checkClean = Step.create "git:check" {
+    let! statusOut = 
+        Cmd.createWithArgs "git" [ "status"; "-s" ]
+        |> Cmd.redirectOutput Cmd.Redirect
+        |> Cmd.result
+        |> Make.map (fun x -> x.Output.Std)
+    if not (String.IsNullOrWhiteSpace statusOut) then
+        do! Step.fail "Repo is not clean, release aborted"
+} 
+
 let pack = Step.create "nuget:pack" {
     let! ctx = Step.context
     let config = configFrom ctx
@@ -82,6 +93,7 @@ Pipelines.create {
 
     do!
         Pipeline.createFrom test "release" {
+            run checkClean
             run pack
             //run push
         }
