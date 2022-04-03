@@ -5,7 +5,7 @@
         </Description>
         <Authors>Henrik Ravn</Authors>
         <Copyright>2022 © Henrik Ravn</Copyright>
-        <Version>1.2.1-beta</Version>
-        <InformationalVersion>1.2.1-beta</InformationalVersion>
+        <Version>1.0</Version>
+        <InformationalVersion>1.0</InformationalVersion>
     </PropertyGroup>
 </Project>

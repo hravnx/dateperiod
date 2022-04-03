@@ -15,6 +15,7 @@ let dotnet = Cmd.createWithArgs "dotnet"
 // ENVIRONMENT --------------------------------------------------------
 
 let isCI = EnvVar.getOptionAs<bool> "GITHUB_ACTIONS" |> Option.contains true
+let forcePack = EnvVar.getOptionAs<int> "FORCE_PACK" |> Option.contains 1
 let NUGET_APIKEY = EnvVar.getOrFail "NUGET_APIKEY"
 
 // STEPS --------------------------------------------------------------
@@ -64,7 +65,7 @@ let checkClean = Step.create "git:check" {
         |> Cmd.redirectOutput Cmd.Redirect
         |> Cmd.result
         |> Make.map (fun x -> x.Output.Std)
-    if not (isCI || String.IsNullOrWhiteSpace statusOut) then
+    if not (forcePack || String.IsNullOrWhiteSpace statusOut) then
         do! Step.fail "Repo is not clean, release aborted"
 }
 
