@@ -1,11 +1,11 @@
 <Project>
     <PropertyGroup>
-      <Description>
-        A single-purpose library, that can help with handling a period of DateOnly endpoints.
-      </Description>
-      <Copyright>2022 Henrik Ravn</Copyright>
-      <Version>1.2.1.0</Version>
-      <InformationalVersion>1.2.1-beta</InformationalVersion>
-      <VersionSuffix>-beta</VersionSuffix>
+        <Description>
+            A single-purpose library that can help with handling a period of DateOnly endpoints.
+        </Description>
+        <Authors>Henrik Ravn</Authors>
+        <Copyright>2022 © Henrik Ravn</Copyright>
+        <Version>1.2.1-beta</Version>
+        <InformationalVersion>1.2.1-beta</InformationalVersion>
     </PropertyGroup>
 </Project>

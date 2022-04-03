@@ -9,8 +9,7 @@
         <IncludeSymbols>true</IncludeSymbols>
         <SymbolPackageFormat>snupkg</SymbolPackageFormat>
         <PackageId>dateperiod</PackageId>
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <Authors>Henrik Ravn</Authors>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
     </PropertyGroup>
 
     <ItemGroup>

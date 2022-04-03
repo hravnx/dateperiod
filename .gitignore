@@ -32,6 +32,7 @@ obj/
 
 # General
 .DS_Store
+.env
 
 # Folder config file
 [Dd]esktop.ini

@@ -1,8 +1,11 @@
 ﻿#r "nuget: FsMake"
+#r "nuget: DotEnv.Net"
 
 open FsMake
 open System
 open System.IO
+
+do dotenv.net.DotEnv.Load()
 
 let configFrom (ctx:MakeContext) =
     if ctx.PipelineName = "release" then "Release" else "Debug"
@@ -12,15 +15,19 @@ let dotnet = Cmd.createWithArgs "dotnet"
 // ENVIRONMENT --------------------------------------------------------
 
 let isCI = EnvVar.getOptionAs<bool> "GITHUB_ACTIONS" |> Option.contains true
+let NUGET_APIKEY = EnvVar.getOrFail "NUGET_APIKEY"
 
 // STEPS --------------------------------------------------------------
 
-let clean = Step.create "clean" {
+let cleanBuildOutput () =
     [   "src/lib/obj";   "src/lib/bin"
         "test/unit/obj"; "test/unit/obj"
         ".pack" 
     ]
     |> Seq.iter (fun x -> if Directory.Exists x then Directory.Delete(x, true))
+
+let clean = Step.create "clean" {
+    cleanBuildOutput ()
 }
 
 let restore = Step.create "restore" {
@@ -31,6 +38,11 @@ let restore = Step.create "restore" {
 let build = Step.create "build" {
     let! ctx = Step.context
     let config = configFrom ctx
+    if config = "Release" then
+        cleanBuildOutput ()
+        do! dotnet ["restore"]
+            |> Cmd.run
+        
     do! dotnet ["build"; "-c"; config]
         |> Cmd.args ["--no-restore"]
         |> Cmd.argsMaybe isCI ["/p:ContinuousIntegrationBuild=true"]
@@ -52,9 +64,10 @@ let checkClean = Step.create "git:check" {
         |> Cmd.redirectOutput Cmd.Redirect
         |> Cmd.result
         |> Make.map (fun x -> x.Output.Std)
-    if not (String.IsNullOrWhiteSpace statusOut) then
+    if not (isCI || String.IsNullOrWhiteSpace statusOut) then
         do! Step.fail "Repo is not clean, release aborted"
-} 
+}
+
 
 let pack = Step.create "nuget:pack" {
     let! ctx = Step.context
@@ -64,13 +77,11 @@ let pack = Step.create "nuget:pack" {
         |> Cmd.run
 }
 
-// let push = Step.create "nuget:push" {
-//     let! ctx = Step.context
-//     let config = configFrom ctx
-
-
-
-// }
+let push = Step.create "nuget:push" {
+    let! ctx = Step.context
+    let! nugetAPIKey = NUGET_APIKEY
+    ctx.Console.WriteLine (Console.warn $"API KEY {nugetAPIKey}")
+}
 
 // PIPELINES ----------------------------------------------------------
 
@@ -95,7 +106,7 @@ Pipelines.create {
         Pipeline.createFrom test "release" {
             run checkClean
             run pack
-            //run push
+            run push
         }
 
     default_pipeline build
